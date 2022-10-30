@@ -41,14 +41,6 @@ pub struct Args {
     #[arg(short, long, default_value_t = false)]
     pub allow_duplicate_passwords: bool,
 
-    /// Remove symbols from default charset
-    #[arg(short = 'S', long, default_value_t = false)]
-    pub no_symbols: bool,
-
-    /// Remove number from default charset
-    #[arg(short = 'N', long, default_value_t = false)]
-    pub no_numbers: bool,
-
     /// Remove lowercase characters from default charset
     #[arg(short = 'L', long, default_value_t = false)]
     pub no_lowercase_characters: bool,
@@ -56,4 +48,12 @@ pub struct Args {
     /// Remove uppercase characters from default charset
     #[arg(short = 'U', long, default_value_t = false)]
     pub no_uppercase_characters: bool,
+
+    /// Remove number from default charset
+    #[arg(short = 'N', long, default_value_t = false)]
+    pub no_numbers: bool,
+
+    /// Remove symbols from default charset
+    #[arg(short = 'S', long, default_value_t = false)]
+    pub no_symbols: bool,
 }

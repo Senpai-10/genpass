@@ -3,14 +3,11 @@ mod consts;
 
 use args::Args;
 use clap::Parser;
-use consts::{MAX_LENGTH, MIN_LENGTH};
+use consts::{
+    LOWERCASE_CHARACTERS_SET, MAX_LENGTH, MIN_LENGTH, NUMBERS_SET, SYMBOLS_SET,
+    UPPERCASE_CHARACTERS_SET,
+};
 use random_string::generate;
-
-
-const SYMBOLS_SET: &str = "!@#$%^&*()_-+={[}]|:;<,>.?/";
-const NUMBERS_SET: &str = "0123456789";
-const LOWERCASE_CHARACTERS_SET: &str = "abcdefghijklmnopqrstuvwxyz";
-const UPPERCASE_CHARACTERS_SET: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 fn main() {
     let mut args = Args::parse();
@@ -23,20 +20,20 @@ fn main() {
         args.length = MIN_LENGTH
     }
 
-    if args.no_symbols == false {
-        charset.push_str(SYMBOLS_SET)
-    }
-
-    if args.no_numbers == false {
-        charset.push_str(NUMBERS_SET)
-    }
-
     if args.no_lowercase_characters == false {
         charset.push_str(LOWERCASE_CHARACTERS_SET)
     }
 
     if args.no_uppercase_characters == false {
         charset.push_str(UPPERCASE_CHARACTERS_SET)
+    }
+
+    if args.no_numbers == false {
+        charset.push_str(NUMBERS_SET)
+    }
+
+    if args.no_symbols == false {
+        charset.push_str(SYMBOLS_SET)
     }
 
     if let Some(args_charset) = &args.charset {
@@ -53,6 +50,14 @@ fn main() {
         charset = charset.replace(&chars_vec[..], "");
     }
 
+    // This check is here, Because you can remove all chars in charset with --no options
+    if charset.is_empty() {
+        charset.push_str(SYMBOLS_SET);
+        charset.push_str(NUMBERS_SET);
+        charset.push_str(LOWERCASE_CHARACTERS_SET);
+        charset.push_str(UPPERCASE_CHARACTERS_SET);
+    }
+
     let length = args.length;
 
     for _ in 0..args.number_of_passwords {
@@ -61,4 +66,3 @@ fn main() {
         println!("{}", generated_password);
     }
 }
-

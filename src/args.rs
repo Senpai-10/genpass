@@ -1,4 +1,4 @@
-use clap::{Parser};
+use clap::Parser;
 use crate::consts::MIN_LENGTH;
 
 /// password generator

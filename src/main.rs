@@ -20,6 +20,7 @@ fn main() {
     let charset = build_charset(&args);
 
     let length = args.length;
+    let mut passwords: Vec<String> = Vec::new();
 
     for _ in 0..args.number_of_passwords {
         let mut generated_password = generate(length, &charset);
@@ -37,6 +38,21 @@ fn main() {
             generated_password.push_str(suffix);
         }
 
+        if args.allow_duplicate_passwords == false {
+            if passwords.contains(&generated_password) {
+                continue;
+            }
+        }
+
         println!("{}", generated_password);
+
+        if args.allow_duplicate_passwords == false {
+            passwords.push(generated_password);
+        }
+    }
+
+    if args.verbose {
+        println!();
+        println!("{} passwords generated!", length);
     }
 }

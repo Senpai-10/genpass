@@ -1,5 +1,5 @@
-use clap::Parser;
 use crate::consts::MIN_LENGTH;
+use clap::Parser;
 
 /// password generator
 #[derive(Parser, Debug)]

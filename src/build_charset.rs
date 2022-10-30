@@ -1,7 +1,4 @@
-use crate::consts::{
-    LOWERCASE_CHARACTERS_SET, NUMBERS_SET, SYMBOLS_SET,
-    UPPERCASE_CHARACTERS_SET,
-};
+use crate::consts::{LOWERCASE_CHARACTERS_SET, NUMBERS_SET, SYMBOLS_SET, UPPERCASE_CHARACTERS_SET};
 use crate::Args;
 
 pub fn build_charset(args: &Args) -> String {
@@ -45,5 +42,5 @@ pub fn build_charset(args: &Args) -> String {
         charset.push_str(UPPERCASE_CHARACTERS_SET);
     }
 
-    return charset
+    return charset;
 }

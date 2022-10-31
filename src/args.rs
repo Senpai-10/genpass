@@ -1,59 +1,67 @@
 use crate::consts::MIN_LENGTH;
-use clap::Parser;
+use clap::{Parser, Subcommand};
 
 /// password generator
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 pub struct Args {
-    /// Length of password generated
-    #[arg(short, long, default_value_t = MIN_LENGTH)]
-    pub length: usize,
+    #[command(subcommand)]
+    pub command: Commands,
+}
 
-    /// Number of password that will be generated
-    #[arg(short, long, default_value_t = 1)]
-    pub number_of_passwords: usize,
+#[derive(Subcommand, Debug)]
+pub enum Commands {
+    Password {
+        /// Length of password generated
+        #[arg(short, long, default_value_t = MIN_LENGTH)]
+        length: usize,
 
-    /// Verbose output
-    #[arg(short, long, default_value_t = false)]
-    pub verbose: bool,
+        /// Number of password that will be generated
+        #[arg(short, long, default_value_t = 1)]
+        number_of_passwords: usize,
 
-    /// Before password
-    #[arg(long)]
-    pub prefix: Option<String>,
+        /// Verbose output
+        #[arg(short, long, default_value_t = false)]
+        verbose: bool,
 
-    /// After password
-    #[arg(long)]
-    pub suffix: Option<String>,
+        /// Before password
+        #[arg(long)]
+        prefix: Option<String>,
 
-    /// List of characters to exclude
-    #[arg(short, long)]
-    pub exclude: Option<String>,
+        /// After password
+        #[arg(long)]
+        suffix: Option<String>,
 
-    /// Custom charset to generate passwords from
-    #[arg(long)]
-    pub charset: Option<String>,
+        /// List of characters to exclude
+        #[arg(short, long)]
+        exclude: Option<String>,
 
-    /// Append custom charset to charset
-    #[arg(long)]
-    pub charset_append: Option<String>,
+        /// Custom charset to generate passwords from
+        #[arg(long)]
+        charset: Option<String>,
 
-    // TODO retry with MAX_RETRYS const
-    #[arg(short, long, default_value_t = false)]
-    pub allow_duplicate_passwords: bool,
+        /// Append custom charset to charset
+        #[arg(long)]
+        charset_append: Option<String>,
 
-    /// Remove lowercase characters from default charset
-    #[arg(short = 'L', long, default_value_t = false)]
-    pub no_lowercase_characters: bool,
+        // TODO retry with MAX_RETRYS const
+        #[arg(short, long, default_value_t = false)]
+        allow_duplicate_passwords: bool,
 
-    /// Remove uppercase characters from default charset
-    #[arg(short = 'U', long, default_value_t = false)]
-    pub no_uppercase_characters: bool,
+        /// Remove lowercase characters from default charset
+        #[arg(short = 'L', long, default_value_t = false)]
+        no_lowercase_characters: bool,
 
-    /// Remove number from default charset
-    #[arg(short = 'N', long, default_value_t = false)]
-    pub no_numbers: bool,
+        /// Remove uppercase characters from default charset
+        #[arg(short = 'U', long, default_value_t = false)]
+        no_uppercase_characters: bool,
 
-    /// Remove symbols from default charset
-    #[arg(short = 'S', long, default_value_t = false)]
-    pub no_symbols: bool,
+        /// Remove number from default charset
+        #[arg(short = 'N', long, default_value_t = false)]
+        no_numbers: bool,
+
+        /// Remove symbols from default charset
+        #[arg(short = 'S', long, default_value_t = false)]
+        no_symbols: bool,
+    },
 }

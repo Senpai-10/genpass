@@ -1,34 +1,41 @@
 use crate::consts::{LOWERCASE_CHARACTERS_SET, NUMBERS_SET, SYMBOLS_SET, UPPERCASE_CHARACTERS_SET};
-use crate::Args;
 
-pub fn build_charset(args: &Args) -> String {
+pub fn build_charset(
+    no_lowercase_characters: bool,
+    no_uppercase_characters: bool,
+    no_numbers: bool,
+    no_symbols: bool,
+    args_charset: Option<String>,
+    charset_append: Option<String>,
+    exclude: Option<String>,
+) -> String {
     let mut charset = String::new();
 
-    if args.no_lowercase_characters == false {
+    if no_lowercase_characters == false {
         charset.push_str(LOWERCASE_CHARACTERS_SET)
     }
 
-    if args.no_uppercase_characters == false {
+    if no_uppercase_characters == false {
         charset.push_str(UPPERCASE_CHARACTERS_SET)
     }
 
-    if args.no_numbers == false {
+    if no_numbers == false {
         charset.push_str(NUMBERS_SET)
     }
 
-    if args.no_symbols == false {
+    if no_symbols == false {
         charset.push_str(SYMBOLS_SET)
     }
 
-    if let Some(args_charset) = &args.charset {
+    if let Some(args_charset) = args_charset {
         charset = args_charset.to_string();
     }
 
-    if let Some(args_charset_append) = &args.charset_append {
-        charset.push_str(args_charset_append)
+    if let Some(args_charset_append) = charset_append {
+        charset.push_str(&args_charset_append)
     }
 
-    if let Some(exclude) = &args.exclude {
+    if let Some(exclude) = exclude {
         let chars_vec: Vec<char> = exclude.chars().collect();
 
         charset = charset.replace(&chars_vec[..], "");

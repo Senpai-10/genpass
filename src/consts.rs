@@ -5,3 +5,6 @@ pub const LOWERCASE_CHARACTERS_SET: &str = "abcdefghijklmnopqrstuvwxyz";
 pub const UPPERCASE_CHARACTERS_SET: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 pub const NUMBERS_SET: &str = "0123456789";
 pub const SYMBOLS_SET: &str = "!@#$%^&*()_-+={[}]|:;<,>.?/";
+
+// TODO: add more words to this list!
+pub const WORDS_LIST: &'static [&str] = &["coffee", "bonding", "wildly", "panther"];

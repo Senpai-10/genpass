@@ -5,13 +5,37 @@ mod consts;
 use args::Args;
 use build_charset::build_charset;
 use clap::Parser;
-use consts::{MAX_LENGTH, MIN_LENGTH};
+use consts::{MAX_LENGTH, MIN_LENGTH, WORDS_LIST};
+use rand::seq::SliceRandom;
 use random_string::generate;
 
 fn main() {
     let args = Args::parse();
 
     match args.command {
+        args::Commands::Passphrase {
+            number_of_words,
+            word_separator,
+            capitalize,
+            include_number,
+            number_of_passphrases,
+        } => {
+            for _ in 0..number_of_passphrases {
+                let mut passphrase = String::new();
+
+                for i in 0..number_of_words {
+                    let word = WORDS_LIST.choose(&mut rand::thread_rng()).unwrap();
+
+                    passphrase.push_str(word);
+
+                    if i != (number_of_words - 1) {
+                        passphrase.push(word_separator);
+                    }
+                }
+
+                println!("{}", passphrase);
+            }
+        }
         args::Commands::Password {
             mut length,
             prefix,

@@ -17,8 +17,8 @@ pub enum Commands {
         number_of_words: usize,
 
         /// Separator between words
-        #[arg(short, long, default_value_t = String::from("-"))]
-        word_separator: String,
+        #[arg(short, long, default_value_t = '-')]
+        word_separator: char,
 
         /// Capitalize the first letter of every words
         #[arg(short, long, default_value_t = false)]
@@ -29,7 +29,7 @@ pub enum Commands {
         include_number: bool,
 
         /// Number of passphrases to generate
-        #[arg(short, long, default_value_t = 1)]
+        #[arg(short = 'N', long, default_value_t = 1)]
         number_of_passphrases: usize,
     },
 

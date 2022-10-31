@@ -9,6 +9,14 @@ use consts::{MAX_LENGTH, MIN_LENGTH, WORDS_LIST};
 use rand::seq::SliceRandom;
 use random_string::generate;
 
+fn uppercase_first_letter(s: &str) -> String {
+    let mut c = s.chars();
+    match c.next() {
+        None => String::new(),
+        Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
+    }
+}
+
 fn main() {
     let args = Args::parse();
 
@@ -17,7 +25,6 @@ fn main() {
             number_of_words,
             word_separator,
             capitalize,
-            include_number,
             number_of_passphrases,
         } => {
             for _ in 0..number_of_passphrases {
@@ -26,7 +33,11 @@ fn main() {
                 for i in 0..number_of_words {
                     let word = WORDS_LIST.choose(&mut rand::thread_rng()).unwrap();
 
-                    passphrase.push_str(word);
+                    if capitalize {
+                        passphrase.push_str(&uppercase_first_letter(word));
+                    } else {
+                        passphrase.push_str(word);
+                    }
 
                     if i != (number_of_words - 1) {
                         passphrase.push(word_separator);

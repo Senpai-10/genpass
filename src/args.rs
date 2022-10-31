@@ -24,10 +24,6 @@ pub enum Commands {
         #[arg(short, long, default_value_t = false)]
         capitalize: bool,
 
-        /// Add single diget number at the end of a word
-        #[arg(short, long, default_value_t = false)]
-        include_number: bool,
-
         /// Number of passphrases to generate
         #[arg(short = 'N', long, default_value_t = 1)]
         number_of_passphrases: usize,

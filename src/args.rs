@@ -29,7 +29,7 @@ pub enum Commands {
         include_number: bool,
 
         /// Number of passphrases to generate
-        #[arg(short, long, default_value_t = 3)]
+        #[arg(short, long, default_value_t = 1)]
         number_of_passphrases: usize,
     },
 

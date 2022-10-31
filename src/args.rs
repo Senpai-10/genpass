@@ -62,7 +62,6 @@ pub enum Commands {
         #[arg(long)]
         charset_append: Option<String>,
 
-        // TODO retry with MAX_RETRYS const
         #[arg(short, long, default_value_t = false)]
         allow_duplicate_passwords: bool,
 

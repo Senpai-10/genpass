@@ -11,6 +11,28 @@ pub struct Args {
 
 #[derive(Subcommand, Debug)]
 pub enum Commands {
+    Passphrase {
+        /// Number of words in the passphrase
+        #[arg(short, long, default_value_t = 3)]
+        number_of_words: usize,
+
+        /// Separator between words
+        #[arg(short, long, default_value_t = String::from("-"))]
+        word_separator: String,
+
+        /// Capitalize the first letter of every words
+        #[arg(short, long, default_value_t = false)]
+        capitalize: bool,
+
+        /// Add single diget number at the end of a word
+        #[arg(short, long, default_value_t = false)]
+        include_number: bool,
+
+        /// Number of passphrases to generate
+        #[arg(short, long, default_value_t = 3)]
+        number_of_passphrases: usize,
+    },
+
     Password {
         /// Length of password generated
         #[arg(short, long, default_value_t = MIN_LENGTH)]
